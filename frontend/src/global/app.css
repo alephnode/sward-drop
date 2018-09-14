@@ -1,0 +1,26 @@
+/*
+  Global App CSS
+  ----------------------
+  Use this file for styles that should be applied to all components.
+  For example, 'font-family' within the 'body' selector is a CSS property
+  most apps will want applied to all components.
+
+  Any global CSS variables should also be applied here.
+*/
+
+body {
+  overflow: hidden;
+  --primary-brand-color: "";
+  --secondary-brand-color: "";
+  --headline-text-color: "";
+  --primary-text-color: "";
+  --secondary-text-color: "";
+  --logo-text-color: "#fa541c";
+  margin: 0px;
+  padding: 0px;
+  font-family: "Rubik", sans-serif;
+  background: #fafafa;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-stroke: 0.45px rgba(0, 0, 0, 0.1);
+}

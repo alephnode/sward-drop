@@ -1,0 +1,21 @@
+header {
+  position: absolute;
+  background: #fafafa;
+  color: white;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  margin: 5px 10px;
+}
+
+h1 {
+  font-family: Quicksand, sans-serif;
+  color: #ff7a45;
+  font-size: 1.6rem;
+  letter-spacing: 0.25rem;
+  padding: 0 8px;
+}
+
+img {
+  width: 54px;
+}
