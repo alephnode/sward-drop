@@ -8,7 +8,7 @@ const s3 = new AWS.S3({
 
 module.exports = ({ files }, res) => {
   const { file } = files;
-  const fileName = files.file.originalFilename;
+  const { originalFilename: fileName } = file;
   const bucketName = `${fileName.replace(/_/g, "-")}-container`;
 
   fs.readFile(file.path, (err, data) => {
