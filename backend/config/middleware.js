@@ -1,5 +1,7 @@
 const bodyParser = require("body-parser");
 const uploadFile = require("./s3");
+const multiparty = require("connect-multiparty");
+const multipartyMiddleware = multiparty();
 
 module.exports = (app, express) => {
   const appRouter = express.Router();
@@ -10,7 +12,9 @@ module.exports = (app, express) => {
 
   const appUrl = "/api";
 
-  appRouter.get("/upload-file", uploadFile);
+  appRouter.post("/upload-file", multipartyMiddleware, (req, res) =>
+    uploadFile(req, res)
+  );
   appRouter.get("/", (req, res) =>
     res.status(200).send("Welcome! this is my api :D")
   );

@@ -6,34 +6,41 @@ const s3 = new AWS.S3({
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
 });
 
-const fileName = `sward_resume_june_2018.pdf`;
-const bucketName = `${fileName.replace(/_/g, "-")}-container`;
+module.exports = ({ files }, res) => {
+  const { file } = files;
+  const fileName = files.file.originalFilename;
+  const bucketName = `${fileName.replace(/_/g, "-")}-container`;
 
-let params = {
-  Bucket: bucketName
-};
+  fs.readFile(file.path, (err, data) => {
+    if (err) throw err;
+    let bucketParams = {
+      Bucket: bucketName
+    };
 
-module.exports = (req, res) => {
-  s3.createBucket(
-    params,
-    (err, data) =>
-      err
-        ? res.status(400).send(`Error: ${err}: ${err.stack}`)
-        : uploadFile(req, res)
-  );
-
-  const uploadFile = (req, res) => {
-    fs.readFile(fileName, (err, data) => {
-      if (err) throw err;
+    s3.createBucket(
+      bucketParams,
+      (bucketErr, bucketData) =>
+        bucketErr
+          ? res.status(400).send(`Error: ${err}: ${err.stack}`)
+          : uploadFile(files, res)
+    );
+    const uploadFile = (x, resp) => {
       const params = {
         Bucket: bucketName,
-        Key: "sward_resume_june_2018.pdf",
-        Body: JSON.stringify(data, null, 2)
+        Key: fileName,
+        Body: data,
+        ACL: "public-read"
       };
-      s3.upload(params, function(s3Err, data) {
-        if (s3Err) res.status(400).send(`s3 Error: ${s3Err}`);
-        res.status(201).send(`File uploaded successfully at ${data.Location}`);
+      s3.upload(params, function(s3Err, uploadData) {
+        fs.unlink(file.path, function(err) {
+          if (err) {
+            console.error(err);
+          }
+          console.log("Temp File Delete");
+        });
+        if (s3Err) resp.status(400).send(`s3 Error: ${s3Err}`);
+        resp.status(201).send(`${uploadData.Location}`);
       });
-    });
-  };
+    };
+  });
 };
