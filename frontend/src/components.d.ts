@@ -10,9 +10,6 @@ import '@stencil/router';
 import '@stencil/state-tunnel';
 
 
-import {
-  MatchResults,
-} from '@stencil/router';
 
 
 declare global {
@@ -34,8 +31,12 @@ declare global {
 
     }
 
-    interface AppProfile {
-      'match': MatchResults;
+    interface AppJoin {
+
+    }
+
+    interface AppLogin {
+
     }
 
     interface AppRoot {
@@ -52,11 +53,19 @@ declare global {
     };
     
 
-    interface HTMLAppProfileElement extends StencilComponents.AppProfile, HTMLStencilElement {}
+    interface HTMLAppJoinElement extends StencilComponents.AppJoin, HTMLStencilElement {}
 
-    var HTMLAppProfileElement: {
-      prototype: HTMLAppProfileElement;
-      new (): HTMLAppProfileElement;
+    var HTMLAppJoinElement: {
+      prototype: HTMLAppJoinElement;
+      new (): HTMLAppJoinElement;
+    };
+    
+
+    interface HTMLAppLoginElement extends StencilComponents.AppLogin, HTMLStencilElement {}
+
+    var HTMLAppLoginElement: {
+      prototype: HTMLAppLoginElement;
+      new (): HTMLAppLoginElement;
     };
     
 
@@ -72,7 +81,8 @@ declare global {
     interface Element {}
     export interface IntrinsicElements {
     'app-home': JSXElements.AppHomeAttributes;
-    'app-profile': JSXElements.AppProfileAttributes;
+    'app-join': JSXElements.AppJoinAttributes;
+    'app-login': JSXElements.AppLoginAttributes;
     'app-root': JSXElements.AppRootAttributes;
     }
   }
@@ -83,8 +93,12 @@ declare global {
 
     }
 
-    export interface AppProfileAttributes extends HTMLAttributes {
-      'match'?: MatchResults;
+    export interface AppJoinAttributes extends HTMLAttributes {
+
+    }
+
+    export interface AppLoginAttributes extends HTMLAttributes {
+
     }
 
     export interface AppRootAttributes extends HTMLAttributes {
@@ -94,13 +108,15 @@ declare global {
 
   interface HTMLElementTagNameMap {
     'app-home': HTMLAppHomeElement
-    'app-profile': HTMLAppProfileElement
+    'app-join': HTMLAppJoinElement
+    'app-login': HTMLAppLoginElement
     'app-root': HTMLAppRootElement
   }
 
   interface ElementTagNameMap {
     'app-home': HTMLAppHomeElement;
-    'app-profile': HTMLAppProfileElement;
+    'app-join': HTMLAppJoinElement;
+    'app-login': HTMLAppLoginElement;
     'app-root': HTMLAppRootElement;
   }
 }
