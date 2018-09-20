@@ -1,4 +1,6 @@
 import { Component } from "@stencil/core";
+import "@stencil/router";
+import "@stencil/state-tunnel";
 
 @Component({
   tag: "app-root",
