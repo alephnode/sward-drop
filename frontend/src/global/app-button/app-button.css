@@ -1,0 +1,23 @@
+#app-button {
+  font-family: Quicksand, sans-serif;
+  font-size: 0.9rem;
+  background: #ff7a45;
+  color: white;
+  margin: 8px;
+  border: none;
+  padding: 0.7rem 2.1rem;
+  border-radius: 3px;
+  outline: 0;
+  text-transform: uppercase;
+  transition: all 0.15s ease;
+  cursor: pointer;
+  max-width: 160px;
+}
+
+#app-button:hover {
+  background: #fa541c;
+}
+
+#app-button:active {
+  transform: translateY(0.1rem);
+}

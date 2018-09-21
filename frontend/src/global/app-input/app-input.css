@@ -1,0 +1,14 @@
+#app-input-container {
+  display: flex;
+  flex-direction: column;
+}
+
+#app-input-container input {
+  height: 2.5rem;
+  width: 20rem;
+  padding-left: 1rem;
+}
+
+#app-input-container label {
+  color: #8c8c8c;
+}

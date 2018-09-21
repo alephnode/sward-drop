@@ -11,7 +11,8 @@ stencil-route-link a {
   text-decoration: none;
 }
 
-h1 {
+h1,
+h2 {
   font-family: Quicksand, sans-serif;
   color: #ff7a45;
   font-size: 1.6rem;
@@ -74,6 +75,7 @@ img {
 
 #nav-container stencil-route-link:last-child div:hover {
   background: #e8e8e8;
+  border: 1px solid #d9d9d9;
 }
 
 #nav-container stencil-route-link:last-child div:active {

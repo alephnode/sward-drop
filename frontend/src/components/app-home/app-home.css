@@ -1,4 +1,4 @@
-.app-home {
+.layout-main {
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -6,47 +6,41 @@
   justify-content: center;
   margin: 0 auto;
   line-height: 2.6rem;
-}
-
-.app-home p {
-  color: #262626;
-  font-size: 1.1rem;
-  max-width: 600px;
-  text-align: center;
-  margin-bottom: 1.8rem;
-}
-
-.app-home p a {
-  color: #ff7a45;
-}
-
-.app-home p a:hover {
-  border-bottom: 1px solid #ff7a45;
-}
-
-button {
-  font-family: Quicksand, sans-serif;
-  font-size: 0.8rem;
-  background: #ff7a45;
-  color: white;
-  margin: 8px;
-  border: none;
-  padding: 12px 25px;
-  border-radius: 3px;
-  outline: 0;
-  text-transform: uppercase;
-  transition: all 0.15s ease;
-  cursor: pointer;
-}
-
-button:hover {
-  background: #fa541c;
-}
-
-button:active {
-  transform: translateY(0.1rem);
+  margin-top: -70px;
 }
 
 .message-styles {
   text-align: center;
+}
+
+#app-home form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#file-upload {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+#file-upload + label {
+  color: #ff7a45;
+  border: 1px solid #ff7a45;
+  font-family: Quicksand, sans-serif;
+  font-size: 0.8rem;
+  padding: 0px 25px;
+  border-radius: 3px;
+  outline: 0;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-bottom: 2rem;
+}
+
+svg {
+  fill: #ff7a45;
 }

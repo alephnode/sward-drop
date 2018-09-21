@@ -10,12 +10,6 @@
 
 body {
   overflow: hidden;
-  --primary-brand-color: "";
-  --secondary-brand-color: "";
-  --headline-text-color: "";
-  --primary-text-color: "";
-  --secondary-text-color: "";
-  --logo-text-color: "#fa541c";
   margin: 0px;
   padding: 0px;
   font-family: "Rubik", sans-serif;
@@ -23,4 +17,19 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-stroke: 0.45px rgba(0, 0, 0, 0.1);
+}
+
+p {
+  color: #262626;
+  font-size: 1.1rem;
+  max-width: 600px;
+  text-align: center;
+}
+
+p a {
+  color: #ff7a45;
+}
+
+p a:hover {
+  border-bottom: 1px solid #ff7a45;
 }

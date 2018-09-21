@@ -42,6 +42,22 @@ declare global {
     interface AppRoot {
 
     }
+
+    interface AppButton {
+      'contained': boolean;
+      'type': string;
+    }
+
+    interface AppHeader {
+
+    }
+
+    interface AppInput {
+      'id': string;
+      'label': string;
+      'name': string;
+      'type': string;
+    }
   }
 
 
@@ -77,6 +93,30 @@ declare global {
     };
     
 
+    interface HTMLAppButtonElement extends StencilComponents.AppButton, HTMLStencilElement {}
+
+    var HTMLAppButtonElement: {
+      prototype: HTMLAppButtonElement;
+      new (): HTMLAppButtonElement;
+    };
+    
+
+    interface HTMLAppHeaderElement extends StencilComponents.AppHeader, HTMLStencilElement {}
+
+    var HTMLAppHeaderElement: {
+      prototype: HTMLAppHeaderElement;
+      new (): HTMLAppHeaderElement;
+    };
+    
+
+    interface HTMLAppInputElement extends StencilComponents.AppInput, HTMLStencilElement {}
+
+    var HTMLAppInputElement: {
+      prototype: HTMLAppInputElement;
+      new (): HTMLAppInputElement;
+    };
+    
+
   namespace JSX {
     interface Element {}
     export interface IntrinsicElements {
@@ -84,6 +124,9 @@ declare global {
     'app-join': JSXElements.AppJoinAttributes;
     'app-login': JSXElements.AppLoginAttributes;
     'app-root': JSXElements.AppRootAttributes;
+    'app-button': JSXElements.AppButtonAttributes;
+    'app-header': JSXElements.AppHeaderAttributes;
+    'app-input': JSXElements.AppInputAttributes;
     }
   }
 
@@ -104,6 +147,22 @@ declare global {
     export interface AppRootAttributes extends HTMLAttributes {
 
     }
+
+    export interface AppButtonAttributes extends HTMLAttributes {
+      'contained'?: boolean;
+      'type'?: string;
+    }
+
+    export interface AppHeaderAttributes extends HTMLAttributes {
+
+    }
+
+    export interface AppInputAttributes extends HTMLAttributes {
+      'id'?: string;
+      'label'?: string;
+      'name'?: string;
+      'type'?: string;
+    }
   }
 
   interface HTMLElementTagNameMap {
@@ -111,6 +170,9 @@ declare global {
     'app-join': HTMLAppJoinElement
     'app-login': HTMLAppLoginElement
     'app-root': HTMLAppRootElement
+    'app-button': HTMLAppButtonElement
+    'app-header': HTMLAppHeaderElement
+    'app-input': HTMLAppInputElement
   }
 
   interface ElementTagNameMap {
@@ -118,6 +180,9 @@ declare global {
     'app-join': HTMLAppJoinElement;
     'app-login': HTMLAppLoginElement;
     'app-root': HTMLAppRootElement;
+    'app-button': HTMLAppButtonElement;
+    'app-header': HTMLAppHeaderElement;
+    'app-input': HTMLAppInputElement;
   }
 }
 declare global { namespace JSX { interface StencilJSX {} } }
