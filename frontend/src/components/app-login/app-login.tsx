@@ -31,26 +31,26 @@ export class AppLogin {
       body: JSON.stringify(this.user)
     })
       .then(r => r.json())
-      .then(re => (re.user ? this.handleSuccess(re) : this.handleError(re)));
+      .then(re => (re.payload ? this.handleSuccess(re) : this.handleError(re)));
   };
 
-  handleSuccess({ user }) {
-    localStorage.setItem("userInfo", JSON.stringify(user));
+  handleSuccess({ payload }) {
+    localStorage.setItem("tokenInfo", JSON.stringify({ ...payload }));
     this.message =
-      "Congrats! You're signed up! Redirecting to your dashboard now ...";
+      "Congrats! You're logged in! Redirecting to your dashboard now ...";
     this.displayResponse = true;
     setTimeout(() => (window.location.href = "/dashboard"), 4000);
   }
 
   handleError({ code }) {
     switch (code) {
-      case "UsernameExistsException":
+      case "UserNotConfirmedException":
         this.message =
-          "A user with this information already exists. Please select a different username/email or reset your password.";
+          "A confirmation request was sent to you via email. Please check your email or sign up again.";
         break;
-      case "InvalidParameterException":
+      case "NotAuthorizedException":
         this.message =
-          "Oh no! Your password must be at least eight characters long and contain one capital letter and one special character.";
+          "Oh no! Your username or password are incorrect. Please try again or reset your password.";
         break;
       default:
         this.message =
@@ -72,7 +72,7 @@ export class AppLogin {
             id="username"
             name="username"
             type="text"
-            label="username"
+            label="username or email"
           />
           <app-input
             disabled={this.isDisabled}
