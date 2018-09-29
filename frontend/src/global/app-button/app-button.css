@@ -26,3 +26,9 @@
   background: #ffbb96;
   cursor: default;
 }
+
+#app-button[data-secondary] {
+  background: #fafafa;
+  border: 1px solid #ff7a45;
+  color: #ff7a45;
+}

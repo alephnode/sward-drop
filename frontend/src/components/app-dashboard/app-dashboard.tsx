@@ -62,7 +62,7 @@ export class AppDashboard {
 
     const checkForm = (
       <div class="message-styles">
-        <p>Welcome! Let's get started.</p>
+        <p>Welcome!</p>
         <form onSubmit={this.handleSubmit}>
           <input type="file" name="files[]" id="file-upload" />
           <label htmlFor="file-upload">

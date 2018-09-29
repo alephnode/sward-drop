@@ -13,6 +13,8 @@ export class AppButton {
   disabled: boolean;
   @Prop()
   link: string;
+  @Prop()
+  secondary: boolean;
 
   render() {
     let btnTpl = (
@@ -21,6 +23,7 @@ export class AppButton {
         type={this.type}
         data-contained={this.contained}
         disabled={this.disabled}
+        data-secondary={this.secondary}
       >
         {this.disabled ? "Saving..." : <slot />}
       </button>

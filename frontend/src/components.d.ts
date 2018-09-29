@@ -31,6 +31,10 @@ declare global {
 
     }
 
+    interface AppForbidden {
+
+    }
+
     interface AppHome {
 
     }
@@ -51,6 +55,7 @@ declare global {
       'contained': boolean;
       'disabled': boolean;
       'link': string;
+      'secondary': boolean;
       'type': string;
     }
 
@@ -65,6 +70,11 @@ declare global {
       'name': string;
       'type': string;
     }
+
+    interface StencilRouteProtected {
+      'component': string;
+      'url': string;
+    }
   }
 
 
@@ -73,6 +83,14 @@ declare global {
     var HTMLAppDashboardElement: {
       prototype: HTMLAppDashboardElement;
       new (): HTMLAppDashboardElement;
+    };
+    
+
+    interface HTMLAppForbiddenElement extends StencilComponents.AppForbidden, HTMLStencilElement {}
+
+    var HTMLAppForbiddenElement: {
+      prototype: HTMLAppForbiddenElement;
+      new (): HTMLAppForbiddenElement;
     };
     
 
@@ -132,10 +150,19 @@ declare global {
     };
     
 
+    interface HTMLStencilRouteProtectedElement extends StencilComponents.StencilRouteProtected, HTMLStencilElement {}
+
+    var HTMLStencilRouteProtectedElement: {
+      prototype: HTMLStencilRouteProtectedElement;
+      new (): HTMLStencilRouteProtectedElement;
+    };
+    
+
   namespace JSX {
     interface Element {}
     export interface IntrinsicElements {
     'app-dashboard': JSXElements.AppDashboardAttributes;
+    'app-forbidden': JSXElements.AppForbiddenAttributes;
     'app-home': JSXElements.AppHomeAttributes;
     'app-join': JSXElements.AppJoinAttributes;
     'app-login': JSXElements.AppLoginAttributes;
@@ -143,12 +170,17 @@ declare global {
     'app-button': JSXElements.AppButtonAttributes;
     'app-header': JSXElements.AppHeaderAttributes;
     'app-input': JSXElements.AppInputAttributes;
+    'stencil-route-protected': JSXElements.StencilRouteProtectedAttributes;
     }
   }
 
   namespace JSXElements {
 
     export interface AppDashboardAttributes extends HTMLAttributes {
+
+    }
+
+    export interface AppForbiddenAttributes extends HTMLAttributes {
 
     }
 
@@ -172,6 +204,7 @@ declare global {
       'contained'?: boolean;
       'disabled'?: boolean;
       'link'?: string;
+      'secondary'?: boolean;
       'type'?: string;
     }
 
@@ -186,10 +219,16 @@ declare global {
       'name'?: string;
       'type'?: string;
     }
+
+    export interface StencilRouteProtectedAttributes extends HTMLAttributes {
+      'component'?: string;
+      'url'?: string;
+    }
   }
 
   interface HTMLElementTagNameMap {
     'app-dashboard': HTMLAppDashboardElement
+    'app-forbidden': HTMLAppForbiddenElement
     'app-home': HTMLAppHomeElement
     'app-join': HTMLAppJoinElement
     'app-login': HTMLAppLoginElement
@@ -197,10 +236,12 @@ declare global {
     'app-button': HTMLAppButtonElement
     'app-header': HTMLAppHeaderElement
     'app-input': HTMLAppInputElement
+    'stencil-route-protected': HTMLStencilRouteProtectedElement
   }
 
   interface ElementTagNameMap {
     'app-dashboard': HTMLAppDashboardElement;
+    'app-forbidden': HTMLAppForbiddenElement;
     'app-home': HTMLAppHomeElement;
     'app-join': HTMLAppJoinElement;
     'app-login': HTMLAppLoginElement;
@@ -208,6 +249,7 @@ declare global {
     'app-button': HTMLAppButtonElement;
     'app-header': HTMLAppHeaderElement;
     'app-input': HTMLAppInputElement;
+    'stencil-route-protected': HTMLStencilRouteProtectedElement;
   }
 }
 declare global { namespace JSX { interface StencilJSX {} } }
