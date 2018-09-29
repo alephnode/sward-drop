@@ -27,10 +27,6 @@ declare global {
 
   namespace StencilComponents {
 
-    interface AppDashboard {
-
-    }
-
     interface AppHome {
 
     }
@@ -67,14 +63,6 @@ declare global {
     }
   }
 
-
-    interface HTMLAppDashboardElement extends StencilComponents.AppDashboard, HTMLStencilElement {}
-
-    var HTMLAppDashboardElement: {
-      prototype: HTMLAppDashboardElement;
-      new (): HTMLAppDashboardElement;
-    };
-    
 
     interface HTMLAppHomeElement extends StencilComponents.AppHome, HTMLStencilElement {}
 
@@ -135,7 +123,6 @@ declare global {
   namespace JSX {
     interface Element {}
     export interface IntrinsicElements {
-    'app-dashboard': JSXElements.AppDashboardAttributes;
     'app-home': JSXElements.AppHomeAttributes;
     'app-join': JSXElements.AppJoinAttributes;
     'app-login': JSXElements.AppLoginAttributes;
@@ -147,10 +134,6 @@ declare global {
   }
 
   namespace JSXElements {
-
-    export interface AppDashboardAttributes extends HTMLAttributes {
-
-    }
 
     export interface AppHomeAttributes extends HTMLAttributes {
 
@@ -189,7 +172,6 @@ declare global {
   }
 
   interface HTMLElementTagNameMap {
-    'app-dashboard': HTMLAppDashboardElement
     'app-home': HTMLAppHomeElement
     'app-join': HTMLAppJoinElement
     'app-login': HTMLAppLoginElement
@@ -200,7 +182,6 @@ declare global {
   }
 
   interface ElementTagNameMap {
-    'app-dashboard': HTMLAppDashboardElement;
     'app-home': HTMLAppHomeElement;
     'app-join': HTMLAppJoinElement;
     'app-login': HTMLAppLoginElement;
