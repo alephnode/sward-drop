@@ -13,12 +13,19 @@ export class AppInput {
   type: string;
   @Prop()
   label: string;
+  @Prop()
+  disabled: boolean;
 
   render() {
     return (
       <div id="app-input-container">
         <label htmlFor={this.id}>{this.label}</label>
-        <input type={this.type} name={this.name} id={this.id} />
+        <input
+          type={this.type}
+          name={this.name}
+          id={this.id}
+          disabled={this.disabled}
+        />
       </div>
     );
   }

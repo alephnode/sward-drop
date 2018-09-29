@@ -31,7 +31,6 @@ module.exports = ({ body }, res) => {
       res.status(400).send(err);
       return;
     }
-    cognitoUser = result.user;
-    res.status(201).send("user name is " + cognitoUser.getUsername());
+    res.status(201).send(result);
   });
 };

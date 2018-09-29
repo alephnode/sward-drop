@@ -33,6 +33,7 @@ export class AppRoot {
               <stencil-route url="/" component="app-home" exact={true} />
               <stencil-route url="/login" component="app-login" />
               <stencil-route url="/join" component="app-join" />
+              <stencil-route url="/dashboard" component="app-dashboard" />
             </stencil-route-switch>
           </stencil-router>
         </main>

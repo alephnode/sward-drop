@@ -10,7 +10,13 @@ export class AppJoin {
   @State()
   displayResponse: boolean;
   @State()
+  isDisabled: boolean;
+  @State()
   message: string;
+
+  constructor() {
+    this.isDisabled = false;
+  }
 
   handleChange = e => {
     let newState = {};
@@ -20,40 +26,56 @@ export class AppJoin {
 
   handleSubmit = e => {
     e.preventDefault();
+    this.isDisabled = true;
     fetch("http://localhost:8000/api/join", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(this.user)
-    }).then(
-      r => (r.status === 201 ? this.handleSuccess() : this.handleError())
-    );
+    })
+      .then(r => r.json())
+      .then(re => (re.user ? this.handleSuccess(re) : this.handleError(re)));
   };
 
-  handleSuccess() {
-    this.message = "Congrats! You're signed up!";
+  handleSuccess({ user }) {
+    localStorage.setItem("userInfo", JSON.stringify(user));
+    this.message =
+      "Congrats! You're signed up! Redirecting to your dashboard now ...";
     this.displayResponse = true;
-    setTimeout(() => (window.location.href = "/"), 4000);
+    setTimeout(() => (window.location.href = "/dashboard"), 4000);
   }
 
-  handleError() {
-    this.message =
-      "Oh no! Your password must be at least eight characters long and contain one capital letter and one special character.";
+  handleError({ code }) {
+    switch (code) {
+      case "UsernameExistsException":
+        this.message =
+          "A user with this information already exists. Please select a different username/email or reset your password.";
+        break;
+      case "InvalidParameterException":
+        this.message =
+          "Oh no! Your password must be at least eight characters long and contain one capital letter and one special character.";
+        break;
+      default:
+        this.message =
+          "An error occurred while processing your request. Please check your information or try again later.";
+        break;
+    }
     this.displayResponse = true;
-    setTimeout(() => (this.displayResponse = false), 4000);
+    setTimeout(() => (this.displayResponse = this.isDisabled = false), 5000);
   }
 
   render() {
     const responseTpl = <p>{this.message}</p>;
 
     const joinTpl = (
-      <div>
+      <div class="join-form-container">
         <p class="login-intro">
           join and store your content in the cloud with ease.
         </p>
         <form onSubmit={this.handleSubmit}>
           <app-input
+            disabled={this.isDisabled}
             onInput={this.handleChange}
             id="username"
             name="username"
@@ -61,6 +83,7 @@ export class AppJoin {
             label="username"
           />
           <app-input
+            disabled={this.isDisabled}
             onInput={this.handleChange}
             id="email"
             name="email"
@@ -68,6 +91,7 @@ export class AppJoin {
             label="email"
           />
           <app-input
+            disabled={this.isDisabled}
             onInput={this.handleChange}
             id="password"
             name="password"
@@ -75,13 +99,16 @@ export class AppJoin {
             label="password"
           />
           <app-input
+            disabled={this.isDisabled}
             onInput={this.handleChange}
             id="confirm-password"
             label="confirm password"
             name="confirmPassword"
             type="password"
           />
-          <app-button type="submit">join</app-button>
+          <app-button type="submit" disabled={this.isDisabled}>
+            {this.isDisabled ? "" : "join"}
+          </app-button>
         </form>
       </div>
     );

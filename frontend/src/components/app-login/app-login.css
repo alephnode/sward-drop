@@ -1,4 +1,5 @@
-.layout-main {
+.layout-main,
+#login-container {
   height: 100vh;
   display: flex;
   flex-direction: column;

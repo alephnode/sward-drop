@@ -1,4 +1,5 @@
-.layout-main {
+.layout-main,
+.join-form-container {
   height: 100vh;
   display: flex;
   flex-direction: column;

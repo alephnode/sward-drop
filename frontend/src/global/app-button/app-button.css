@@ -11,7 +11,7 @@
   text-transform: uppercase;
   transition: all 0.15s ease;
   cursor: pointer;
-  max-width: 160px;
+  max-width: 170px;
 }
 
 #app-button:hover {
@@ -20,4 +20,9 @@
 
 #app-button:active {
   transform: translateY(0.1rem);
+}
+
+#app-button[disabled] {
+  background: #ffbb96;
+  cursor: default;
 }
