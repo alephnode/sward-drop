@@ -16,7 +16,7 @@ module.exports = (app, express) => {
   appRouter.post("/upload-file", multipartyMiddleware, (req, res) =>
     uploadFile(req, res)
   );
-  appRouter.get("/join", (req, res) => createUser(req, res));
+  appRouter.post("/join", (req, res) => createUser(req, res));
   appRouter.get("/", (req, res) =>
     res.status(200).send("Welcome! this is my api :D")
   );

@@ -6,15 +6,15 @@ const poolData = {
   ClientId: process.env.AWS_COGNITO_APP_CLIENT_ID
 };
 
-module.exports = (req, res) => {
+module.exports = ({ body }, res) => {
+  let { email, username, password } = body;
   const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
-  if (userPool) console.log(userPool);
 
   let attributeList = [];
 
   let dataEmail = {
     Name: "email",
-    Value: "srmward@icloud.com"
+    Value: email
   };
   var attributeEmail = new AmazonCognitoIdentity.CognitoUserAttribute(
     dataEmail
@@ -23,15 +23,15 @@ module.exports = (req, res) => {
   attributeList.push(attributeEmail);
 
   var cognitoUser;
-  userPool.signUp("srmward", "AWStes#423l", attributeList, null, function(
+  userPool.signUp(username, password, attributeList, null, function(
     err,
     result
   ) {
     if (err) {
-      res.send(err);
+      res.status(400).send(err);
       return;
     }
     cognitoUser = result.user;
-    res.send("user name is " + cognitoUser.getUsername());
+    res.status(201).send("user name is " + cognitoUser.getUsername());
   });
 };
