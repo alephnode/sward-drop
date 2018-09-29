@@ -6,12 +6,17 @@ const s3 = new AWS.S3({
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
 });
 
-module.exports = ({ files }, res) => {
-  const { file } = files;
-  const { originalFilename: fileName } = file;
+module.exports = (
+  {
+    files: {
+      file: { originalFilename: fileName, path }
+    }
+  },
+  res
+) => {
   const bucketName = `${fileName.replace(/_/g, "-")}-container`;
 
-  fs.readFile(file.path, (err, data) => {
+  fs.readFile(path, (err, data) => {
     if (err) throw err;
     let bucketParams = {
       Bucket: bucketName
@@ -22,24 +27,25 @@ module.exports = ({ files }, res) => {
       (bucketErr, bucketData) =>
         bucketErr
           ? res.status(400).send(`Error: ${err}: ${err.stack}`)
-          : uploadFile(files, res)
+          : uploadFile()
     );
-    const uploadFile = (x, resp) => {
+
+    const uploadFile = () => {
       const params = {
         Bucket: bucketName,
         Key: fileName,
         Body: data,
         ACL: "public-read"
       };
-      s3.upload(params, function(s3Err, uploadData) {
-        fs.unlink(file.path, function(err) {
-          if (err) {
-            console.error(err);
-          }
-          console.log("Temp File Delete");
-        });
-        if (s3Err) resp.status(400).send(`s3 Error: ${s3Err}`);
-        resp.status(201).send(`${uploadData.Location}`);
+
+      s3.upload(params, (s3Err, { Location: location }) => {
+        fs.unlink(
+          path,
+          err => (err ? console.error(err) : console.log("Temp File Deleted"))
+        );
+        s3Err
+          ? res.status(400).send(`s3 Error: ${s3Err}`)
+          : res.status(201).send(`${location}`);
       });
     };
   });
