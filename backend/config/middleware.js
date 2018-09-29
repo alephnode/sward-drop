@@ -1,6 +1,6 @@
 const bodyParser = require("body-parser");
 const uploadFile = require("./s3");
-const createUser = require("./cognito");
+const { createUser, loginUser } = require("./cognito");
 const multiparty = require("connect-multiparty");
 const multipartyMiddleware = multiparty();
 
@@ -17,6 +17,7 @@ module.exports = (app, express) => {
     uploadFile(req, res)
   );
   appRouter.post("/join", (req, res) => createUser(req, res));
+  appRouter.post("/login", (req, res) => loginUser(req, res));
   appRouter.get("/", (req, res) =>
     res.status(200).send("Welcome! this is my api :D")
   );
