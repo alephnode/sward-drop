@@ -6,31 +6,53 @@ const poolData = {
   ClientId: process.env.AWS_COGNITO_APP_CLIENT_ID
 };
 
-module.exports = ({ body }, res) => {
-  let { email, username, password } = body;
-  const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 
-  let attributeList = [];
+module.exports = {
+  createUser: ({ body: { email, username, password } }, res) => {
+    let attributeList = [];
+    let dataEmail = {
+      Name: "email",
+      Value: email
+    };
 
-  let dataEmail = {
-    Name: "email",
-    Value: email
-  };
-  var attributeEmail = new AmazonCognitoIdentity.CognitoUserAttribute(
-    dataEmail
-  );
+    const attributeEmail = new AmazonCognitoIdentity.CognitoUserAttribute(
+      dataEmail
+    );
 
-  attributeList.push(attributeEmail);
+    attributeList.push(attributeEmail);
 
-  var cognitoUser;
-  userPool.signUp(username, password, attributeList, null, function(
-    err,
-    result
-  ) {
-    if (err) {
-      res.status(400).send(err);
-      return;
-    }
-    res.status(201).send(result);
-  });
+    userPool.signUp(
+      username,
+      password,
+      attributeList,
+      null,
+      (err, result) =>
+        err ? res.status(400).send(err) : res.status(201).send(result)
+    );
+  },
+  loginUser: ({ body: { username: Username, password: Password } }, res) => {
+    const authDetails = new AmazonCognitoIdentity.AuthenticationDetails({
+      Username,
+      Password
+    });
+    const userData = {
+      Username,
+      Pool: userPool
+    };
+    const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+    cognitoUser.authenticateUser(authDetails, {
+      onSuccess: result => {
+        let response = {
+          payload: {
+            accessToken: result.getAccessToken().getJwtToken(),
+            idToken: result.getIdToken().getJwtToken(),
+            refreshToken: result.getRefreshToken().getToken()
+          }
+        };
+        res.status(200).send(response);
+      },
+      onFailure: err => res.status(400).send(err)
+    });
+  }
 };
