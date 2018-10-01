@@ -7,7 +7,30 @@ import "@stencil/state-tunnel";
   styleUrl: "app-root.css"
 })
 export class AppRoot {
+  logout() {
+    localStorage.setItem("tokenInfo", "");
+    window.location.href = "/";
+  }
   render() {
+    const guestNavTpl = (
+      <div class="nav-links">
+        <stencil-route-link url="/join">
+          <div>join</div>
+        </stencil-route-link>
+        <stencil-route-link url="/login">
+          <div>login</div>
+        </stencil-route-link>
+      </div>
+    );
+
+    const userNavTpl = (
+      <div class="nav-links">
+        <stencil-route-link url="/dashboard">
+          <div>dashboard</div>
+        </stencil-route-link>
+        <div onClick={this.logout}>logout</div>
+      </div>
+    );
     return (
       <div>
         <div id="nav-container">
@@ -17,14 +40,7 @@ export class AppRoot {
               <h1>sward drop</h1>
             </header>
           </stencil-route-link>
-          <div class="nav-links">
-            <stencil-route-link url="/join">
-              <div>join</div>
-            </stencil-route-link>
-            <stencil-route-link url="/login">
-              <div>login</div>
-            </stencil-route-link>
-          </div>
+          {localStorage.getItem("tokenInfo") ? userNavTpl : guestNavTpl}
         </div>
 
         <main>

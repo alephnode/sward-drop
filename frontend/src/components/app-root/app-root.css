@@ -82,6 +82,10 @@ img {
   transform: translateY(0.1rem);
 }
 
+#nav-container .nav-links {
+  cursor: pointer;
+}
+
 @media screen and (max-width: 992px) {
   #nav-container {
     width: 100%;
