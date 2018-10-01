@@ -11,13 +11,10 @@ export class AppInput {
   @State()
   verifiedComponent: string;
   render() {
-    return (
-      <stencil-route
-        url={this.url}
-        component={
-          localStorage.getItem("userInfo") ? this.component : "app-forbidden"
-        }
-      />
+    return localStorage.getItem("tokenInfo") ? (
+      <stencil-route url={this.url} component={this.component} />
+    ) : (
+      <stencil-route url={this.url} component="app-forbidden" />
     );
   }
 }
