@@ -66,6 +66,11 @@ declare global {
       'name': string;
       'type': string;
     }
+
+    interface StencilRouteProtected {
+      'component': string;
+      'url': string;
+    }
   }
 
 
@@ -133,6 +138,14 @@ declare global {
     };
     
 
+    interface HTMLStencilRouteProtectedElement extends StencilComponents.StencilRouteProtected, HTMLStencilElement {}
+
+    var HTMLStencilRouteProtectedElement: {
+      prototype: HTMLStencilRouteProtectedElement;
+      new (): HTMLStencilRouteProtectedElement;
+    };
+    
+
   namespace JSX {
     interface Element {}
     export interface IntrinsicElements {
@@ -144,6 +157,7 @@ declare global {
     'app-button': JSXElements.AppButtonAttributes;
     'app-header': JSXElements.AppHeaderAttributes;
     'app-input': JSXElements.AppInputAttributes;
+    'stencil-route-protected': JSXElements.StencilRouteProtectedAttributes;
     }
   }
 
@@ -188,6 +202,11 @@ declare global {
       'name'?: string;
       'type'?: string;
     }
+
+    export interface StencilRouteProtectedAttributes extends HTMLAttributes {
+      'component'?: string;
+      'url'?: string;
+    }
   }
 
   interface HTMLElementTagNameMap {
@@ -199,6 +218,7 @@ declare global {
     'app-button': HTMLAppButtonElement
     'app-header': HTMLAppHeaderElement
     'app-input': HTMLAppInputElement
+    'stencil-route-protected': HTMLStencilRouteProtectedElement
   }
 
   interface ElementTagNameMap {
@@ -210,6 +230,7 @@ declare global {
     'app-button': HTMLAppButtonElement;
     'app-header': HTMLAppHeaderElement;
     'app-input': HTMLAppInputElement;
+    'stencil-route-protected': HTMLStencilRouteProtectedElement;
   }
 }
 declare global { namespace JSX { interface StencilJSX {} } }
