@@ -32,7 +32,7 @@ export class AppRoot {
       </div>
     );
     return (
-      <div>
+      <div id="app-container">
         <div id="nav-container">
           <stencil-route-link url="/">
             <header>
